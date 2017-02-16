@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description"
+          content="{$set[0]['description']}">
+    <meta name="keywords" content="{$set[0]['keywords']}">
+    <title>{$title}</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link href="{$Think.config.Common}bootstarp/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{$Think.config.Css}style.css" rel="stylesheet">
+</head>
+
+<body>
+<header class="header">
+    <div class="site-bar">
+        <div class="container">
+            <img src="{$Think.config.Img}case_phone.png" class="fr">
+        </div>
+    </div>
+    <div class="site-header">
+        <div class="container cl">
+            <div class="header-logo">
+                <a href="{$Think.config.Webroot}"><img src="{$Think.config.Img}14730583656547.png"></a>
+            </div>
+            <ul class="header-nav cl" id="header">
+                <li class="active">
+                    <a href="">首页</a>
+                </li>
+                {volist name="menu" id="list"}
+                <li>
+                    <a href="{$list['url']}">{$list['name']}</a>
+                    {if condition="count($list['child']) gt 0 "}
+                    <div class="children-nav cl">
+                        <ul class="td menu">
+                            {volist name="$list['child']" id="child"}
+                            <li>
+                                <a href="{$child['url']}">{$child['name']}</a>
+                            </li>
+                            {/volist}
+                        </ul>
+                        <div class="td img">
+                            <img src="{$Think.config.Img}{$list['img']}">
+                        </div>
+                    </div>
+                    {/if}
+                </li>
+                {/volist}
+                <li class="slider" id="headerSlider"></li>
+            </ul>
+        </div>
+    </div>
+</header>
+{__CONTENT__}
+<footer class="footer">
+    <div class="container">
+        <ul class="link cl">
+            {volist name="link" id="link"}
+            <li>
+                <a href="{$link['url']}"><img src="{$Think.config.Img}{$link['img']}"></a>
+            </li>
+            {/volist}
+        </ul>
+    </div>
+    <div class="footer-con">
+        <div class="container">
+            <div class="cl">
+                <div class="tr company cl">
+                    <div class="name">{$set[0]['acronym']}旗下网站：</div>
+                    <ul class="subsidiary cl">
+                        {volist name="selfSite" id="self"}
+                        <li>
+                            <a href="{$self['url']}">{$self['name']}</a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
+                <ul class="other-site cl">
+                    {volist name="otherSite" id="other"}
+                    <li>
+                        <a href="{$other['url']}">{$other['name']}</a>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+
+            <div class="left">
+
+                <div class="tr">
+                    总部：{$set[0]['address']}
+                </div>
+                <div class="tr">
+                    版权所有：{$set[0]['name']}
+                </div>
+                <div class="tr">
+                    备案号：{$set[0]['icp']}
+                </div>
+                <div class="group">
+                    <div class="tr">
+                        售前/售后服务:
+                    </div>
+                    <div class="tr">
+                        {$set[0]['tel']}
+                    </div>
+                    <div class="tr">
+                        {$set[0]['time']}
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+
+                <ul class="code cl">
+                    <li>
+                        <img src="{$Think.config.Img}code.jpg">
+                    </li>
+                    <li>
+                        <img src="{$Think.config.Img}code2.jpg">
+                    </li>
+                    <li>
+                        <img src="{$Think.config.Img}nz-code.jpg">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="{$Think.config.Common}jquery.min.js"></script>
+<script src="{$Think.config.Common}bootstarp/js/bootstrap.min.js"></script>
+<script src="{$Think.config.Js}index.js"></script>
+</body>
+
+</html>
