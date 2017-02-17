@@ -1,6 +1,19 @@
 [v-cloak] {
     display: none;
 }
+.cl:after,
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+
+.cl,
+.clearfix {
+    zoom: 1
+}
 .login-body{
     background-color: #1B3160;
 }

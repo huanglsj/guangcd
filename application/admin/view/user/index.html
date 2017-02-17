@@ -1,11 +1,16 @@
 {extend name="childlayout" /}
 {block name="main"}
-<div class="input-group form-group col-md-6">
-    <input type="text" class="form-control"placeholder="请输入昵称" >
+<div class="cl">
+    <div class="input-group form-group col-md-6 pull-left">
+        <input type="text" class="form-control"placeholder="请输入昵称" >
     <span class="input-group-btn">
           <button class="btn btn-info btn-search">搜索</button>
     </span>
+    </div>
+    <button type="button" class="btn btn-info pull-right">添加用户</button>
 </div>
+
+
 <table class="table table-hover table-striped table-bordered">
     <thead>
     <tr>
