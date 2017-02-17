@@ -10,14 +10,14 @@ class Menu extends Model{
         $menu = Db::table("gc_menu")->where(array('status' => 1,'type'=>$type,'parent_id'=>0))->order('sort asc')->select();
         $list=array();
         foreach($menu as $arr){
-            $child = $this->SidType($arr['id']);
+            $child = $this->sidType($arr['id']);
             $arr['child'] = $child;
             array_push($list,$arr);
         }
         return $list;
     }
 
-    function SidType($id){
+    function sidType($id){
         $menu = Db::table("gc_menu")->where(array('status' => 1,'type'=>0,'parent_id'=>$id))->order('sort asc')->select();
         return $menu;
     }

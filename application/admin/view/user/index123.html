@@ -1,0 +1,71 @@
+{extend name="childlayout" /}
+{block name="main"}
+<div class="input-group form-group col-md-6">
+    <input type="text" class="form-control"placeholder="请输入昵称" >
+    <span class="input-group-btn">
+          <button class="btn btn-info btn-search">搜索</button>
+    </span>
+</div>
+<table class="table table-hover table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>昵称</th>
+        <th>邮箱</th>
+        <th>手机</th>
+        <th>角色</th>
+        <th>注册时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody id="list">
+    <tr v-for='(list,index) in lists'>
+        <th>{{index+1}}</th>
+        <td>{{list.nick_name}}</td>
+        <td>{{list.email}}</td>
+        <td>{{list.phone}}</td>
+        <td>{{list.role}}</td>
+        <td>{{list.add_time}}</td>
+        <td>
+            <button type="button" class="btn btn-danger">{{list.status==1?'禁止':'恢复'}}</button>
+            <button type="button" class="btn btn-primary">编辑</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+{$page}
+{/block}
+{block name="customScript"}
+    <script>
+        //用户列表
+        layer.load(0, {shade: [0.5,'#000']});
+
+        var app = new Vue({
+            el: '#list',
+            data: {
+                lists: [],
+            },
+            methods: {
+//                openRand: function(item) {
+//                    appcan.locStorage.setVal('flightDetail', item);
+//                    appcan.window.open("plane_ticket_book", "plane_ticket_book.html", 2);
+//                },
+            },
+        });
+        $.ajax({
+            url:'/admin/user/select',
+            type:'post',
+            dataType:'json',
+            success:function (data) {
+                layer.closeAll();
+                if(data.status=='0008'){
+                    app.lists = data.message.data;
+                }
+            },
+            error:function (err) {
+                
+            }
+        })
+    </script>
+{/block}

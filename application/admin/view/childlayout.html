@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<meta name="format-detection" content="telephone=no">
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="天津广川科技-是一家拥有多渠道运营团队的第三方服务公司，提供全网营销一体化管理系统。主要提供：淘宝、天猫、京东店铺托管，店铺装修，产品拍摄，视觉设计，微信代运营等服务。服务热线：022-27158289">
+		<meta name="keywords" content="天津代运营，天津网店代运营，天津淘宝托管，天猫店铺托管，京东店铺代运营，天津微信代运营，淘宝店铺装修，淘宝产品拍摄，天津企业网站建设">
+		<title>天津广川科技有限公司管理后台</title>
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link href="{$Think.config.Common}bootstarp/css/bootstrap.min.css" rel="stylesheet">
+		<link href="{$Think.config.Css}bootstrapValidator.css" rel="stylesheet">
+		<link href="{$Think.config.Css}admin.css" rel="stylesheet">
+	</head>
+
+	<body>
+	    <div class="iframe-main">
+			{block name="main"}{/block}
+		</div>
+		<script type="text/javascript" src="{$Think.config.Common}jquery.min.js"></script>
+		<script src="{$Think.config.Common}bootstarp/js/bootstrap.min.js"></script>
+		<script src="{$Think.config.Common}vue.min.js"></script>
+		<script src="{$Think.config.Js}bootstrapValidator.min.js"></script>
+		<script type="text/javascript" src="{$Think.config.Common}layer/layer.js"></script>
+		{block name="widgetScript"}{/block}
+		<script type="text/javascript" src="{$Think.config.Js}admin.js"></script>
+		{block name="customScript"}{/block}
+	</body>
+
+</html>

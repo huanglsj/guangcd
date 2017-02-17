@@ -1,0 +1,60 @@
+{extend name="childlayout" /}
+{block name="main"}
+<div class="container">
+    <form class="form-horizontal" id="siteSet">
+        <div class="form-group">
+            <label for="name" class="col-md-2 control-label">公司名称</label>
+            <div class="col-md-5">
+                <input type="text" value="{$set[0]['name']}" class="form-control" name="name" id="name" placeholder="公司名称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="address" class="col-md-2 control-label">公司地址</label>
+            <div class="col-md-5">
+                <input type="text" value="{$set[0]['address']}" class="form-control" name="address" id="address" placeholder="公司地址">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="acronym" class="col-md-2 control-label">公司简称</label>
+            <div class="col-md-5">
+                <input type="text" value="{$set[0]['acronym']}" class="form-control" name="acronym" id="acronym" placeholder="公司简称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="icp" class="col-md-2 control-label">公司ICP</label>
+            <div class="col-md-5">
+                <input type="text" value="{$set[0]['icp']}" class="form-control" name="icp" id="icp" placeholder="公司ICP">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tel" class="col-md-2 control-label">公司电话</label>
+            <div class="col-md-5">
+                <input type="text" value="{$set[0]['tel']}" class="form-control" name="tel" id="tel" placeholder="公司电话">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="time" class="col-md-2 control-label">服务时间</label>
+            <div class="col-md-5">
+                <input type="text" value="{$set[0]['time']}" class="form-control" name="time" id="time" placeholder="服务时间">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-md-2 control-label">网站简介</label>
+            <div class="col-md-5">
+                <textarea class="form-control" rows="5" id="description" name="description" placeholder="网站简介">{$set[0]['description']}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="keywords" class="col-md-2 control-label">关键词</label>
+            <div class="col-md-5">
+                 <textarea class="form-control" rows="4" id="keywords" name="keywords" placeholder="关键词">{$set[0]['keywords']}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-5">
+                <button type="button" class="btn btn-block btn-primary" id="siteSetSubmit">修 改</button>
+            </div>
+        </div>
+    </form>
+</div>
+{/block}

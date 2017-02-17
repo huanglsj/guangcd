@@ -9,5 +9,21 @@ class SiteSet extends Model{
         $site = Db::table("gc_site_set")->select();
         return $site;
     }
+
+    //修改数据
+    public function amend($name,$address,$acronym,$icp,$tel,$time,$description,$keywords){
+        $amend = SiteSet::save([
+            'name' => $name,
+            'address' => $address,
+            'acronym' => $acronym,
+            'icp' => $icp,
+            'tel' => $tel,
+            'time' => $time,
+            'description' => $description,
+            'keywords' => $keywords,
+        ],['id' => 1]);
+
+        return $amend;
+    }
 }
 ?>

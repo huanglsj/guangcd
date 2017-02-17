@@ -1,0 +1,26 @@
+[v-cloak] {
+    display: none;
+}
+.login-body{
+    background-color: #1B3160;
+}
+.login{
+    width: 300px;
+    margin: 200px auto 100px;
+    background-color: #1B3160;
+    color: #fff;
+    top: 40%;
+}
+.login-copyright{
+    text-align: center;
+    color: #fff;
+}
+.iframe-main{
+    padding: 20px 15px;
+}
+textarea{
+    resize: none;
+}
+.pagination{
+    float: right;
+}

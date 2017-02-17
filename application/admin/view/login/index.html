@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="天津广川科技-是一家拥有多渠道运营团队的第三方服务公司，提供全网营销一体化管理系统。主要提供：淘宝、天猫、京东店铺托管，店铺装修，产品拍摄，视觉设计，微信代运营等服务。服务热线：022-27158289">
+    <meta name="keywords" content="天津代运营，天津网店代运营，天津淘宝托管，天猫店铺托管，京东店铺代运营，天津微信代运营，淘宝店铺装修，淘宝产品拍摄，天津企业网站建设">
+    <title>天津广川科技有限公司管理后台</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link href="{$Think.config.Common}bootstarp/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{$Think.config.Css}admin.css" rel="stylesheet">
+</head>
+<body class="login-body">
+<div class="container">
+    <div class="login">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="name" class="col-md-3 control-label">用户名</label>
+                <div class="col-md-9">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="用户名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-md-3 control-label">密码</label>
+                <div class="col-md-9">
+                    <input type="password" name="password" class="form-control" id="password" placeholder="密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="code" class="col-md-3 control-label">验证码</label>
+                <div class="col-md-9">
+                    <input type="text" name="captcha" class="form-control" id="captcha" placeholder="验证码">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <img src="{:captcha_src()}" id="captchaImg" alt="captcha" onclick="this.src='{:captcha_src()}'" width="100%" height="50px" />
+                    </div>
+                </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="button" class="btn btn-default" id="submit">登  录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="login-copyright">版权所有：天津广川科技有限公司 津ICP备13000335号</div>
+</div>
+<script type="text/javascript" src="{$Think.config.Common}jquery.min.js"></script>
+<script type="text/javascript" src="{$Think.config.Common}layer/layer.js"></script>
+<script>
+    $("#submit").click(function(){
+        var username = $('#name').val().trim();
+        var password = $('#password').val().trim();
+        var captcha = $('#captcha').val();
+        if(username == '') {
+            layer.msg('用户名不能为空！', {icon: 2});
+            return;
+        }
+        if(password == '') {
+            layer.msg('密码不能为空！', {icon: 2});
+            return;
+        }
+        if(captcha == '') {
+            layer.msg('验证码不能为空！', {icon: 2});
+            return;
+        }
+        $.ajax({
+            url:'/admin/login/logining',
+            data:{
+                username:username,
+                password:password,
+                captcha:captcha
+            },
+            dataType:'json',
+            type:'post',
+            success:function (data) {
+                console.log(data);
+                if(data.status=='0000'){
+                    layer.msg(data.message, {icon: 2});
+                    return;
+                }
+                if(data.status=='0001'){
+                    layer.msg(data.message, {icon: 2});
+                    $("#captchaImg").click();
+                    return;
+                }
+                if(data.status=='0008'){
+                    window.location.href = '/admin/index';
+                }
+            },
+            error:function (err) {
+                layer.msg(err, {icon: 2});
+            }
+        })
+    });
+
+    document.onkeydown = function(e){
+        var ev = document.all ? window.event : e;
+        if(ev.keyCode==13) {
+            $("#submit").click();
+        }
+    }
+</script>
+</body>
+</html>
