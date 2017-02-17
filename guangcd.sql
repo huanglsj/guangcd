@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-02-16 15:31:11
+Date: 2017-02-17 17:23:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -129,6 +129,21 @@ INSERT INTO `gc_menu` VALUES ('38', '0', '加入我们', null, '1', null, '0', n
 INSERT INTO `gc_menu` VALUES ('39', '0', '联系我们', null, '1', null, '0', null);
 
 -- ----------------------------
+-- Table structure for gc_role
+-- ----------------------------
+DROP TABLE IF EXISTS `gc_role`;
+CREATE TABLE `gc_role` (
+  `id` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `power` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of gc_role
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for gc_site
 -- ----------------------------
 DROP TABLE IF EXISTS `gc_site`;
@@ -174,3 +189,27 @@ CREATE TABLE `gc_site_set` (
 -- Records of gc_site_set
 -- ----------------------------
 INSERT INTO `gc_site_set` VALUES ('1', '天津广川科技有限公司', '天津市 南开区 南泥湾路 世贸电商城 A座408', '广川科技', '津ICP备13000335号', '022-27158289', '周一 到 周五(8:45--18:00)', '天津广川科技-是一家拥有多渠道运营团队的第三方服务公司，提供全网营销一体化管理系统。主要提供：淘宝、天猫、京东店铺托管，店铺装修，产品拍摄，视觉设计，微信代运营等服务。服务热线：022-27158289', '天津代运营，天津网店代运营，天津淘宝托管，天猫店铺托管，京东店铺代运营，天津微信代运营，淘宝店铺装修，淘宝产品拍摄，天津企业网站建设');
+
+-- ----------------------------
+-- Table structure for gc_user
+-- ----------------------------
+DROP TABLE IF EXISTS `gc_user`;
+CREATE TABLE `gc_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `real_name` varchar(255) DEFAULT NULL COMMENT '真实姓名',
+  `nick_name` varchar(255) DEFAULT NULL COMMENT '昵称',
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL COMMENT '角色',
+  `add_time` datetime DEFAULT NULL,
+  `status` int(1) DEFAULT '1' COMMENT '1可用0不可用',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of gc_user
+-- ----------------------------
+INSERT INTO `gc_user` VALUES ('1', null, '123456', null, 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '1');
+INSERT INTO `gc_user` VALUES ('2', null, '1234567', null, 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '0');
+INSERT INTO `gc_user` VALUES ('3', '', '12345678', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '0000-00-00 00:00:00', '1');
