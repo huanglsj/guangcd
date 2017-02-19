@@ -235,7 +235,7 @@ body{
 	position: absolute;
 }
 .index-who .right .ft{
-	top: 0;
+	top: -8px;
 	left: 0;
 }
 .index-who .right .rb{
