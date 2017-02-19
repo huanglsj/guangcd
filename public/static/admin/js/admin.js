@@ -76,33 +76,10 @@ $('#siteSet').bootstrapValidator({
             }
         }
     }
-});
-//网址设置修改
-$("#siteSetSubmit").click(function () {
-    var name = $("#name").val().trim(),
-        address = $("#address").val().trim(),
-        acronym = $("#acronym").val().trim(),
-        icp = $("#icp").val().trim(),
-        tel = $("#tel").val().trim(),
-        time = $("#time").val().trim(),
-        description = $("#description").val().trim(),
-        keywords = $("#keywords").val().trim();
-    var data = {
-        name:name,
-        address:address,
-        acronym:acronym,
-        icp:icp,
-        tel:tel,
-        time:time,
-        description:description,
-        keywords:keywords,
-    };
-    $.ajax({
-        url:'/admin/siteset/updatedata',
-        dataType:'json',
-        type:'post',
-        data:data,
-        success:function (data) {
+}).on('success.form.bv', function(e) {
+    e.preventDefault();
+    var $form = $(e.target);
+    $.post($form.attr('action'), $form.serialize(), function(data) {
             if(data.status=='0008'){
                 layer.msg(data.message, {icon: 1});
                 return;
@@ -111,11 +88,7 @@ $("#siteSetSubmit").click(function () {
                 layer.msg(data.message, {icon: 2});
                 return;
             }
-        },
-        error:function (err) {
-            layer.msg(err, {icon: 2});
-        }
-    })
+    },'json');
 });
 
 

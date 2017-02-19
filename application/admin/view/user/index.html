@@ -1,13 +1,18 @@
 {extend name="childlayout" /}
 {block name="main"}
 <div class="cl">
+
     <div class="input-group form-group col-md-6 pull-left">
-        <input type="text" class="form-control"placeholder="请输入昵称" >
+        <form class="input-group col-md-12" id="searchForm" method="get" action="/admin/user/index">
+            <input type="text" name="search" class="form-control" placeholder="请输入昵称">
     <span class="input-group-btn">
-          <button class="btn btn-info btn-search">搜索</button>
+          <button class="btn btn-info btn-search" type="submit" id="searchSubmit">搜索</button>
     </span>
+        </form>
     </div>
-    <button type="button" class="btn btn-info pull-right">添加用户</button>
+    <div class="pull-right form-group cl-md-4">
+        <button type="button" class="btn btn-info  ">添加用户</button>
+    </div>
 </div>
 
 
@@ -25,54 +30,69 @@
     </thead>
     <tbody id="list">
     {volist name='list' id='list'}
-        <tr>
-            <th>{$i}</th>
-            <td>{$list['nick_name']}</td>
-            <td>{$list['email']}</td>
-            <td>{$list['phone']}</td>
-            <td>{$list['role']}</td>
-            <td>{$list['add_time']}</td>
-            <td>
-                <button type="button" class="btn btn-danger">{$list['status']==1?'禁止':'恢复'}</button>
-                <button type="button" class="btn btn-primary">编辑</button>
-            </td>
-        </tr>
+    <tr>
+        <th>{$i}</th>
+        <td>{$list['nick_name']}</td>
+        <td>{$list['email']}</td>
+        <td>{$list['phone']}</td>
+        <td>{$list['role']}</td>
+        <td>{$list['add_time']}</td>
+        <td>
+            <button type="button" class="btn btn-danger">{$list['status']==1?'禁止':'恢复'}</button>
+            <button type="button" class="btn btn-primary">编辑</button>
+        </td>
+    </tr>
     {/volist}
     </tbody>
 </table>
-
 {$page}
 {/block}
 {block name="customScript"}
-    <script>
-        //用户列表
-//        layer.load(0, {shade: [0.5,'#000']});
+<script>
 
-        var app = new Vue({
-            el: '#list',
-            data: {
-                lists: [],
-            },
-            methods: {
-//                openRand: function(item) {
-//                    appcan.locStorage.setVal('flightDetail', item);
-//                    appcan.window.open("plane_ticket_book", "plane_ticket_book.html", 2);
-//                },
-            },
-        });
-        $.ajax({
-            url:'/admin/user/select',
-            type:'post',
-            dataType:'json',
-            success:function (data) {
-                layer.closeAll();
-                if(data.status=='0008'){
-                    app.lists = data.message.data;
-                }
-            },
-            error:function (err) {
-                
-            }
-        })
-    </script>
+//    $('#searchForm').bootstrapValidator({
+//        message: '不能为空！',
+//        feedbackIcons: {
+//            valid: 'glyphicon glyphicon-ok',
+//            invalid: 'glyphicon glyphicon-remove',
+//            validating: 'glyphicon glyphicon-refresh'
+//        },
+//        fields: {
+//            search: {
+//                message: '搜索内容不能为空',
+//                validators: {
+//                    notEmpty: {
+//                        message: '搜索内容不能为空'
+//                    }
+//                }
+//            },
+//        }
+//    }).on('success.form.bv', function(e) {
+//        e.preventDefault();
+//        var $form = $(e.target);
+//        $.post($form.attr('action'), $form.serialize(), function(data) {
+//
+//        },'json');
+//
+//    });
+
+
+    //用户列表
+//    $.ajax({
+//        url: '/admin/user/select',
+//        type: 'post',
+//        dataType: 'json',
+//        success: function (data) {
+//            layer.closeAll();
+//            if (data.status == '0008') {
+//                app.lists = data.message.data;
+//            }
+//        },
+//        error: function (err) {
+//
+//        }
+//    })
+
+    $.post()
+</script>
 {/block}

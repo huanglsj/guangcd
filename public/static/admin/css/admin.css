@@ -15,18 +15,23 @@
     zoom: 1
 }
 .login-body{
-    background-color: #1B3160;
+    background-color: #091f50;
 }
 .login{
     width: 300px;
-    margin: 200px auto 100px;
-    background-color: #1B3160;
+    margin: 150px auto 100px;
     color: #fff;
     top: 40%;
 }
 .login-copyright{
     text-align: center;
     color: #fff;
+}
+.login-error{
+    display: none;
+}
+.login-error .help-block{
+    color: #a94442;
 }
 .iframe-main{
     padding: 20px 15px;

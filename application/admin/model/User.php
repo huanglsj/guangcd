@@ -6,13 +6,16 @@ class User extends Model{
 
     public static function login($username,$password)
     {
-        $user = User::where(array('status' => 1,'nick_name'=>$username,'password'=>$password))->field('id,nick_name')->find()->toArray();
+        $user = User::where(array('status' => 1,'nick_name'=>$username,'password'=>$password))->field('id,nick_name')->find();
         return $user;
     }
 
-    public function select()
+    public function select($search)
     {
-        $select = User::paginate(10);
+        $where['nick_name ']= array('like','%'.$search.'%');
+        $select = User::where($where)->paginate(10,false,[
+            'query' => array('search'=>$search),
+        ]);
         return $select;
     }
 }

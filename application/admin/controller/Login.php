@@ -19,7 +19,7 @@ class Login extends Controller
     //登录验证
     public function logining()
     {
-        $username = $_POST['username'];
+        $username = $_POST['name'];
         $password = md5($_POST['password']);
         $captcha = $_POST['captcha'];
         if($username==''){
