@@ -11,7 +11,7 @@
         </form>
     </div>
     <div class="pull-right form-group cl-md-4">
-        <button type="button" class="btn btn-info  ">添加用户</button>
+        <button type="button" class="btn btn-info" onclick="addUser()">添加用户</button>
     </div>
 </div>
 
@@ -31,15 +31,25 @@
     <tbody id="list">
     {volist name='list' id='list'}
     <tr>
-        <th>{$i}</th>
+        <td>{$i}</td>
         <td>{$list['nick_name']}</td>
         <td>{$list['email']}</td>
-        <td>{$list['phone']}</td>
-        <td>{$list['role']}</td>
-        <td>{$list['add_time']}</td>
+        <td>{$list['mobile']}</td>
+        <td>{$list['role_name']}</td>
+        <td>{$list['create_time']}</td>
         <td>
-            <button type="button" class="btn btn-danger">{$list['status']==1?'禁止':'恢复'}</button>
-            <button type="button" class="btn btn-primary">编辑</button>
+            {if condition="$user['role'] eq 1"}
+            <button onclick="changeStatus(this,{$list['id']})" type="button"
+                    class="btn {$list['status']==1?'btn-danger':'btn-warning'}">{$list['status']==1?'禁止':'恢复'}
+            </button>
+            <button type="button" class="btn btn-primary" onclick="editView({$list['id']})">编辑</button>
+            {else /}
+            <button onclick="changeStatus(this,{$list['id']})" type="button"
+                    class="btn {$list['status']==1?'btn-danger':'btn-warning'}" {$list[
+            'role_id']==1?'disabled="disabled"':''}>{$list['status']==1?'禁止':'恢复'}</button>
+            <button type="button" class="btn btn-primary" {$list[
+            'role_id']==1?'disabled="disabled"':''} onclick="editView({$list['id']})">编辑</button>
+            {/if}
         </td>
     </tr>
     {/volist}
@@ -49,50 +59,89 @@
 {/block}
 {block name="customScript"}
 <script>
+    layer.load(0, {shade: [0.5, '#000']});
+    function addUser() {
+        if (top.topManager) {
+            top.topManager.openPage({
+                id: 'userAdd',
+                href: '/admin/user/add',
+                title: '添加用户'
+            });
+        }
+    }
 
-//    $('#searchForm').bootstrapValidator({
-//        message: '不能为空！',
-//        feedbackIcons: {
-//            valid: 'glyphicon glyphicon-ok',
-//            invalid: 'glyphicon glyphicon-remove',
-//            validating: 'glyphicon glyphicon-refresh'
-//        },
-//        fields: {
-//            search: {
-//                message: '搜索内容不能为空',
-//                validators: {
-//                    notEmpty: {
-//                        message: '搜索内容不能为空'
+    function changeStatus(obj,id) {
+        var txt = $(obj).text();
+        layer.confirm('您确定要'+txt+'？', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                url: '/admin/user/changestatus',
+                dataType: 'json',
+                type: 'post',
+                data:{
+                    id:id
+                },
+                success: function (data) {
+                    if (data.status == '0008') {
+                        $(obj).text(txt=='禁止'?'恢复':'禁止');
+                       txt=='禁止'?$(obj).addClass("btn-warning").removeClass("btn-danger"):$(obj).addClass("btn-danger").removeClass("btn-warning");
+                        layer.closeAll();
+                        return;
+                    }
+
+                    if (data.status == '0000') {
+                        layer.msg(data.message, {icon: 2});
+                        return;
+                    }
+                },
+                error: function (err) {
+                    layer.msg(err, {icon: 2});
+                }
+            })
+        }, function () {
+            layer.closeAll();
+        });
+    }
+
+    function editView(id) {
+        var id = id*1;
+        if (top.topManager) {
+            top.topManager.openPage({
+                id: 'userEdit',
+                href: '/admin/user/edit?id='+id,
+                title: '编辑用户'
+            });
+        }
+//        $.ajax({
+//            url:'/admin/user/isedit',
+//            type:'post',
+//            dataType:'json',
+//            data:{
+//                id:id
+//            },
+//            success:function (data) {
+//                if(data.status=='0000'){
+//                    layer.msg(data.message, {icon: 2});
+//                    return;
+//                }
+//                if(data.status=='0008'){
+//                    if (top.topManager) {
+//                        top.topManager.openPage({
+//                            id: 'userEdit',
+//                            href: '/admin/user/edit?id='+id,
+//                            title: '编辑用户'
+//                        });
 //                    }
 //                }
 //            },
-//        }
-//    }).on('success.form.bv', function(e) {
-//        e.preventDefault();
-//        var $form = $(e.target);
-//        $.post($form.attr('action'), $form.serialize(), function(data) {
-//
-//        },'json');
-//
-//    });
-
-
-    //用户列表
-//    $.ajax({
-//        url: '/admin/user/select',
-//        type: 'post',
-//        dataType: 'json',
-//        success: function (data) {
-//            layer.closeAll();
-//            if (data.status == '0008') {
-//                app.lists = data.message.data;
+//            error:function (err) {
+//                layer.msg(err, {icon: 2});
 //            }
-//        },
-//        error: function (err) {
-//
-//        }
-//    })
-
-    $.post()
+//        })
+    }
+    window.onload = function () {
+        layer.closeAll();
+    }
 </script>
 {/block}

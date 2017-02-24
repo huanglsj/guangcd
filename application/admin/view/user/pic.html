@@ -1,0 +1,136 @@
+{extend name="childlayout" /}
+{block name="main"}
+<!--<form class="form-horizontal" id="userAddForm" enctype="multipart/form-data" method="post" action="/admin/user/uploadImg">-->
+    <!--<input type="file" class="form-control" name="head" id="head">-->
+    <!--<button type="submit">上传</button>-->
+    <!--</form>-->
+<!--<span id="promptzone">+</span>-->
+<!--<div class="imgdiv"></div>-->
+<!--<span class="img_span">-->
+        <!--<input type="file" name="head" />-->
+    <!--</span>-->
+
+<!--<input type="button" value="上传" class="upload" />-->
+
+<!--<input class='file' type='file' name='file' id='head' onclick="addImgUpload()">-->
+{/block}
+{block name="widgetScript"}
+<!--<script src="{$Think.config.Common}jquery.form.js"></script>-->
+<!--<script src="{$Think.config.Common}ajaxfileupload.js"></script>-->
+<!--<script src="{$Think.config.Common}imageUpload.js"></script>-->
+<script src="{$Think.config.Common}ajaxUpload1.js"></script>
+{/block}
+{block name="customScript"}
+<script>
+
+//    function addImgUpload1(){
+//        var file= $("#head").val();
+//    }
+    
+//    function addImgUpload() {
+//                new imageUpload(
+//                {
+//                    upBtn: "head",//选择文件控件ID
+//                    divShow: "teaImgdiv",//展示图片的div
+//                    imgShow: "",//展示图片的img
+//                    uploadUrl: '/admin/user/uploadimg',
+//                    fileSize: 10 * 1024 * 1024,
+//                    init: function () {
+////                        var ind=Global.Core.layerLoadingAlert();
+//                    },
+//                    callBack: function (status, msg) {
+//                        console.log(msg);
+//                        if (!status) {
+////                            Global.Alert.show(msg,1,2);
+////                            Global.Core.layerCloseAll();
+//                            return;
+//                        }
+//                        if (msg) {
+//
+//                        }
+//                    }
+//                });
+//    }
+//    $("#head").bind("change", function() {
+//        $.ajaxFileUpload({
+//            url:"/admin/user/upload",
+//            secureuri:false,
+//            fileElementName:'head',
+//            dataType: 'json',
+//            success: function(data, status){
+//                console.log(dara);
+//            }, error: function (data, status, e) {
+//
+//            }
+//        });
+//    });
+
+//    $(".upload").upload({
+//        successFn: "success"
+//    });
+//
+//    //上传成功后执行该函数
+//    function success(response, statusText, xhr, $this) {
+//        //比如插入编辑器
+////        alert(response.Data.RelativePath + $this.attr("value"));
+//        console.log(response)
+//    }
+
+    //    function addImgUpload() {
+//        $.ajaxUpload({
+//            url: '/admin/user/uploadimg',
+//            data: ':file',
+//            success: function (data, status, xhr) {
+//                console.log(data);
+//            }
+//        });
+//    }
+
+
+//    $.ajaxUploadSettings.name = 'file';
+//    $('#promptzone').ajaxUploadPrompt({
+//        url : '/admin/user/uploadimg',
+//        beforeSend : function () {
+////            if($(".input-image li").size()>=6){
+////                layer.open({content: '最多可以上传5张图片',skin: 'msg',time:2});
+////                return false;
+////            }
+//        },
+//        onprogress : function (e) {},
+//        error : function () {},
+//        success : function (data) {
+//            console.log(data);
+////            if(data.error==0){
+////                $(".input-image").prepend("<li onclick=\"$(this).remove();\"><img src='"+data.url+"'><input type='hidden' name='images[]' value='"+data.url+"'></li>");
+////            }else{
+////                layer.open({content: data.message,skin: 'msg',time:2});
+////            }
+//        }
+//    });
+
+    var addImgUpload = function () {
+        new imageUpload(
+                {
+                    upBtn: "head",//选择文件控件ID
+                    divShow: "teaImgdiv",//展示图片的div
+                    imgShow: "",//展示图片的img
+                    uploadUrl: '/admin/user/uploadimg',
+                    fileSize: 1 * 1024 * 1024,
+                    init: function () {
+//                        var ind=Global.Core.layerLoadingAlert();
+                    },
+                    callBack: function (status, msg) {
+                        console.log(msg);
+                        if (!status) {
+//                            Global.Alert.show(msg,1,2);
+//                            Global.Core.layerCloseAll();
+                            return;
+                        }
+                        if (msg) {
+
+                        }
+                    }
+                });
+    }
+</script>
+{/block}

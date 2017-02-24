@@ -1,0 +1,199 @@
+{extend name="childlayout" /}
+{block name="main"}
+<div class="container">
+    <form class="form-horizontal" id="userAddForm" enctype="multipart/form-data" method="post" action="/admin/user/requestedituser">
+        <div class="form-group">
+            <label for="nickname" class="col-md-2 control-label">昵称</label>
+            <div class="col-md-5">
+                <input type="text" readonly="readonly" value="{$edit['nick_name']}" class="form-control" name="nickname" id="nickname" placeholder="昵称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-md-2 control-label">密码</label>
+            <div class="col-md-5">
+                <input type="password" class="form-control" name="password" id="password" placeholder="密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="repassword" class="col-md-2 control-label">确认密码</label>
+            <div class="col-md-5">
+                <input type="password" class="form-control" name="repassword" id="repassword" placeholder="确认密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="role" class="col-md-2 control-label">角色</label>
+            <div class="col-md-5">
+                <select name="role" class="form-control" id="role">
+                    {volist name="roleList" id="roleList"}
+                    <option value="{$roleList['id']}" {$edit['role']==$roleList['id']?'selected':''}>{$roleList['name']}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="realname" class="col-md-2 control-label">真实姓名</label>
+            <div class="col-md-5">
+                <input type="text" value="{$edit['real_name']}" class="form-control" name="realname" id="realname" placeholder="真实姓名">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-md-2 control-label">邮箱</label>
+            <div class="col-md-5">
+                <input type="text" value="{$edit['email']}" class="form-control" name="email" id="email" placeholder="邮箱">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="mobile" class="col-md-2 control-label">手机号码</label>
+            <div class="col-md-5">
+                <input type="text" value="{$edit['mobile']}" class="form-control" name="mobile" id="mobile" placeholder="手机号码">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="head" class="col-md-2 control-label">上传头像</label>
+            <div class="col-md-2 error">
+                <button id="head" type="button" class="btn btn-block btn-success">上 传</button>
+                <input type="hidden" name="url" id="headUrl" value="{$edit['head_url']=='/static/upload/head/default.png'?'':$edit['head_url']}">
+                {if condition="$edit['head_url'] neq  '/static/upload/head/default.png'"}
+                 <img src="{$edit['head_url']}" width="100%" class="mt head-img">
+                {/if}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-5">
+                <input type="hidden" name="id" id="id" value="{$edit['id']}">
+                <button type="submit" class="btn btn-block btn-primary" id="userAdd">编 辑</button>
+            </div>
+        </div>
+    </form>
+</div>
+{/block}
+{block name="widgetScript"}
+<script src="{$Think.config.Common}ajaxUpload.js"></script>
+{/block}
+{block name="customScript"}
+<script>
+    $.ajaxUploadSettings.name = 'file';
+    $('#head').ajaxUploadPrompt({
+        url : '/admin/user/uploadimg',
+        dataType:'json',
+        success : function (data) {
+            $(".help-url").remove();
+            $("#headUrl").val('');
+            $(".head-img").remove();
+            if(data){
+                if(data.status=='0000'){
+                    var html = '<small class="help-block help-url">'+data.message+'</small>';
+                    $('#head').parent().append(html);
+                }else{
+                    $("#headUrl").val(data.message);
+                    $('#head').parent().append('<img src="'+data.message+'" width="100%" class="mt head-img">');
+                }
+            }
+        }
+    });
+
+    $('#userAddForm').bootstrapValidator({
+        message: '不能为空！',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            nickname: {
+                message: '昵称不能为空',
+                validators: {
+                    notEmpty: {
+                        message: '昵称不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: '昵称长度必须在6到30之间'
+                    }
+                }
+            },
+            password: {
+                message: '密码不能为空',
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: '密码长度必须在6到30之间'
+                    }
+                }
+            },
+            repassword: {
+                message: '密码不能为空',
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: '密码长度必须在6到30之间'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: '密码不一致'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    regexp: {
+                        regexp: /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,
+                        message: '请输入正确的邮箱'
+                    }
+                }
+            },
+            mobile: {
+                validators: {
+                    stringLength: {
+                        min: 11,
+                        max: 11,
+                        message: '请输入11位手机号码'
+                    },
+                    regexp: {
+                        regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                        message: '请输入正确的手机号码'
+                    }
+                }
+            }
+        }
+    }).on('success.form.bv', function (e) {
+        e.preventDefault();
+        var $form = $(e.target);
+        $.post($form.attr('action'), $form.serialize(), function (data) {
+            if (data.status == '0008') {
+                layer.msg(data.message, {icon: 1});
+                setTimeout(function () {
+                    top.topManager.openPage({
+                        id : 'user',
+                        isClose : true
+                    });
+                    top.topManager.reloadPage('user');
+                },1000);
+                return;
+            }
+
+            if (data.status == '0007') {
+                layer.msg(data.message, {icon: 1});
+                setTimeout(function () {
+                    window.parent.location.reload();
+                },1000);
+                return;
+            }
+
+            if (data.status == '0000') {
+                layer.msg(data.message, {icon: 2});
+                return;
+            }
+        }, 'json');
+    });
+</script>
+{/block}

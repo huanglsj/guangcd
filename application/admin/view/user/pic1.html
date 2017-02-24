@@ -1,0 +1,104 @@
+{extend name="childlayout" /}
+{block name="main"}
+<!--<label class="control-label" for="bike_type">&nbsp;</label>-->
+<!--<input type="file" style="display:none" name="userfile">-->
+<!--<input type="hidden" id="newbikephotoName" name="bike_photo" value="" />-->
+<!--<input type="hidden" id="oldbikephotoName" value="" />-->
+<!--<div class="controls" style="text-align:left;">-->
+<!--<img  id="newbikephoto" src="/ajaxup/Public/images/nophoto.jpg" style="max-height:200px;" />-->
+<!--<span class="help-inline"></span>-->
+<!--<br>-->
+<!--<div id="uploadphotoconfirm"></div>-->
+<!--<br>-->
+<!--<input type="button" class="btn btn-primary" id="upload_button" value="上传图片"/><br/>-->
+<!--<span class="help-inline">*请上传格式为.png .jpg .jpeg 的图片</span>-->
+<!--</div>-->
+<!--<form class="form-horizontal" id="userAddForm" enctype="multipart/form-data" method="post">-->
+<input type="file" class="form-control" name="head" id="head" onclick="addImgUpload()">
+    <!--</form>-->
+{/block}
+{block name="widgetScript"}
+<script src="{$Think.config.Common}imageUpload.js"></script>
+<!--<script src="{$Think.config.Common}ajaxUpload.js"></script>-->
+{/block}
+{block name="customScript"}
+<script>
+
+        function addImgUpload() {
+            new imageUpload(
+                    {
+                        upBtn: "head",//选择文件控件ID
+                        divShow: "teaImgdiv",//展示图片的div
+                        imgShow: "",//展示图片的img
+                        uploadUrl: '/admin/user/imgUpload',
+                        fileSize: 10 * 1024 * 1024,
+                        init: function () {
+    //                        var ind=Global.Core.layerLoadingAlert();
+                        },
+                        callBack: function (status, msg) {
+                            console.log(msg);
+                            if (!status) {
+    //                            Global.Alert.show(msg,1,2);
+    //                            Global.Core.layerCloseAll();
+                                return;
+                            }
+                            if (msg) {
+
+                            }
+                        }
+                    });
+        }
+
+    $(function () {
+        var button = $('#upload_button');
+        new AjaxUpload(button, {
+            action: "/admin/user/imgUpload",
+            name: 'head',
+            onSubmit: function (file, ext, obj) {
+                console.log(obj);
+                var inputFile = obj._input;
+                var size = (inputFile.files[0].size)/1024/1024;
+                var maxSize = 1;
+                if (ext && /^(jpg|png|jpeg|gif|JPG)$/.test(ext)) {
+                    //alert('文件类型为图片');
+                    console.log(size);
+                    if (size > maxSize) {
+                        alert("图片不能超过" + maxSize + 'M');
+                        return;
+                    } else {
+                        alert(1)
+                    }
+                } else {
+                    alert('文件格式错误，请上传格式为.png .jpg .jpeg 的图片');
+                    return;
+                }
+            },
+            onComplete: function (file, response) {
+                console.log(response);
+                alert(response.message)
+//                if(response != "success"){
+//                    if(response =='2'){
+//                        confirmdiv.text("文件格式错误，请上传格式为.png .jpg .jpeg 的图片");
+//                    }else{
+//                        if(response.length>20){
+//                            confirmdiv.text("文件上传失败请重新上传"+response);
+//                        }else{
+//                            confirmdiv.text("上传完成");
+//                            $("#newbikephotoName").val("/ajaxup/upload/images/"+response);
+//                            $("#newbikephoto").attr("src","/ajaxup/upload/images/"+response);
+//                        }
+//                    }
+//
+//                }
+//
+//                window.clearInterval(interval);
+//
+//                this.enable();
+//
+//                if(response == "success")
+//                    alert('上传成功');
+            }
+        });
+    });
+</script>
+{/block}

@@ -42,3 +42,12 @@ textarea{
 .pagination{
     float: right;
 }
+.mt{
+    margin-top: 15px;
+}
+.mb{
+    margin-bottom: 15px;
+}
+.error .help-block{
+    color: #a94442;
+}

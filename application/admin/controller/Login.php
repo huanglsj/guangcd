@@ -43,8 +43,16 @@ class Login extends Controller
         $model = new User();
         $check = $model->login($username,$password);
         if($check){
-            session("user", $check);
-            JsonParser::GenerateJsonResult('0008','验证成功！');
+            if($check['status']){
+                if($check['role']==1 || $check['role']==2){
+                    session("user", $check);
+                    JsonParser::GenerateJsonResult('0008','验证成功！');
+                }else{
+                    JsonParser::GenerateJsonResult('0000','所在用户组无权登录！');
+                }
+            }else{
+                JsonParser::GenerateJsonResult('0000','用户已被禁止！');
+            }
         }else{
             JsonParser::GenerateJsonResult('0000','用户名或密码不正确！');
         }
