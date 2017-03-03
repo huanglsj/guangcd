@@ -15,8 +15,8 @@ class User extends Model
 
     public function select($search)
     {
-        $where['nick_name'] = array('like', '%' . $search . '%');
-        $select = User:: join("role", "gc_role.id = gc_user.role")->where($where)->field('gc_user.id,gc_user.nick_name,gc_user.email,gc_user.mobile,gc_user.create_time,gc_user.status,gc_user.role,role.id as role_id,role.name as role_name')->order('create_time', 'desc')->paginate(10, false, [
+        $where['u.nick_name'] = array('like', '%' . $search . '%');
+        $select = User::alias('u')->join("role r", "r.id = u.role")->where($where)->field('u.id,u.nick_name,u.email,u.mobile,u.create_time,u.status,u.role,r.id as role_id,r.name as role_name')->order('u.create_time', 'desc')->paginate(10, false, [
             'query' => array('search' => $search),
         ]);
         return $select;
