@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-02-17 17:23:18
+Date: 2017-03-03 20:51:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -133,15 +133,19 @@ INSERT INTO `gc_menu` VALUES ('39', '0', '联系我们', null, '1', null, '0', n
 -- ----------------------------
 DROP TABLE IF EXISTS `gc_role`;
 CREATE TABLE `gc_role` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `power` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` int(1) DEFAULT '1' COMMENT '1可用0不可用',
+  `power` varchar(255) DEFAULT NULL COMMENT '权限',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of gc_role
 -- ----------------------------
+INSERT INTO `gc_role` VALUES ('1', '超级管理员', '1', null);
+INSERT INTO `gc_role` VALUES ('2', '管理员', '1', null);
+INSERT INTO `gc_role` VALUES ('3', '普通用户', '1', null);
 
 -- ----------------------------
 -- Table structure for gc_site
@@ -200,16 +204,23 @@ CREATE TABLE `gc_user` (
   `nick_name` varchar(255) DEFAULT NULL COMMENT '昵称',
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `role` varchar(255) DEFAULT NULL COMMENT '角色',
-  `add_time` datetime DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `role` int(255) DEFAULT NULL COMMENT '角色',
+  `create_time` int(10) DEFAULT NULL,
   `status` int(1) DEFAULT '1' COMMENT '1可用0不可用',
+  `head_url` varchar(255) DEFAULT '/static/upload/head/default.png' COMMENT '头像',
+  `update_time` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of gc_user
 -- ----------------------------
-INSERT INTO `gc_user` VALUES ('1', null, '123456', null, 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '1');
-INSERT INTO `gc_user` VALUES ('2', null, '1234567', null, 'e10adc3949ba59abbe56e057f20f883e', null, null, null, '0');
-INSERT INTO `gc_user` VALUES ('3', '', '12345678', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '0000-00-00 00:00:00', '1');
+INSERT INTO `gc_user` VALUES ('1', '', '123456', '', 'e10adc3949ba59abbe56e057f20f883e', '', '1', '1487573272', '1', '/static/upload/head/default.png', '1487922901');
+INSERT INTO `gc_user` VALUES ('2', null, '1234567', null, 'e10adc3949ba59abbe56e057f20f883e', null, '2', '1487573272', '0', '/static/upload/head/default.png', '1487573272');
+INSERT INTO `gc_user` VALUES ('3', '', '12345678', '', 'e10adc3949ba59abbe56e057f20f883e', '', '2', '1487573272', '1', '/static/upload/head/58afe2830430b.png', '1487922874');
+INSERT INTO `gc_user` VALUES ('4', '', '123789', '', 'e10adc3949ba59abbe56e057f20f883e', '', '2', '1487573720', '1', '/static/upload/head/default.png', '1487573720');
+INSERT INTO `gc_user` VALUES ('5', '', '789456', '', 'e10adc3949ba59abbe56e057f20f883e', '', '2', '1487646815', '1', '/static/upload/head/58abb033b9b2a.png', '1487923094');
+INSERT INTO `gc_user` VALUES ('6', '', '159789', '', 'e10adc3949ba59abbe56e057f20f883e', '', '3', '1487647216', '1', '/static/upload/head/default.png', '1487647216');
+INSERT INTO `gc_user` VALUES ('7', '', '789145', '', 'e10adc3949ba59abbe56e057f20f883e', '', '3', '1487648635', '0', '/static/upload/head/default.png', '1487667423');
+INSERT INTO `gc_user` VALUES ('8', '', '12345610', '', 'e10adc3949ba59abbe56e057f20f883e', '', '3', '1487914375', '1', '/static/upload/head/58afe0f9bba9f.jpg', '1487921424');
