@@ -245,3 +245,120 @@ body{
 .index-who .right p{
 	text-indent: 28px;
 }
+.index-product{
+	width: 856px;
+	margin: auto;
+}
+.index-product li{
+	width: 120px;
+	float: left;
+	text-align: center;
+	margin-right: 26px;
+	font-size: 18px;
+	color: #000;
+	height: 160px;
+}
+.index-product li img{
+	margin-bottom: 5px;
+}
+.index-product li.other-li{
+	width: 266px;
+	font-size: 14px;
+	padding: 15px;
+}
+.index-product li.other-li P{
+	text-align: left;
+}
+.index-product li.other-li .title{
+	text-align: center;
+	color: blue;
+	margin-bottom: 15px;
+	font-size: 18px;
+}
+.index-product li.yywb{
+	margin-right: 0;
+}
+.index-power{
+	width: 1200px;
+	height: 460px;
+	margin: auto;
+}
+.index-power > li{
+	width: 280px;
+	height: 350px;
+	float: left;
+	margin-right: 26px;
+	background: #fff;
+	position: relative;
+	-moz-box-shadow: 6px 5px 15px #333333;
+	-webkit-box-shadow: 6px 5px 15px #333333;
+	box-shadow: 6px 5px 15px #333333;
+}
+.index-power > li:last-child{
+	margin-right: 0;
+}
+.index-power > li h4{
+	color: #000;
+	text-transform: uppercase;
+	text-align: left;
+	padding-left: 10px;
+	font-size: 1.3em;
+	font-weight: 300;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+.index-power > li h4 b{
+	color: red;
+	font-size: 1.5em;
+	font-weight: 500;
+}
+.index-power > li .sub-ul li{
+	list-style-type: disc;
+	margin: 0 20px 15px 30px;
+	text-align: left;
+	font-size: 1.2em;
+	font-weight: 300;
+	line-height: 1.6em;
+}
+.index-value{
+	text-align: center;
+	font-size: 16px;
+}
+.baidu-map{
+	height: 590px;
+	position: relative;
+}
+.baidu-map .map{
+	height: 100%;
+}
+.baidu-map .map-contact {
+	width: 920px;
+	height: 515px;
+	background-color: #000;
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.80;
+	opacity: 0.80;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	z-index: 10;
+	color: #fff;
+	padding-left: 20px;
+}
+.map-contact .map-title {
+	line-height: 65px;
+	font-weight: bold;
+	font-size: 25px;
+}
+.map-contact .map-content {
+	width: 600px;
+	height: 404px;
+	background-color: White;
+	overflow: hidden;
+	color: #000;
+}
+.map-contact .map-content .list{
+	padding: 20px 0 0 20px;
+	font-size: 16px;
+	line-height: 26px;
+}

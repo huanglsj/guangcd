@@ -12,10 +12,12 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
     <link href="{$Think.config.Common}bootstarp/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{$Think.config.Css}style.css" rel="stylesheet">
+    <link href="{$Think.config.Css}style.css?hh=898" rel="stylesheet">
+    {block name="otherCss"}{/block}
 </head>
 
 <body>
+{block name="header"}
 <header class="header">
     <div class="site-bar">
         <div class="container">
@@ -28,7 +30,7 @@
                 <a href="{$Think.config.Webroot}"><img src="{$Think.config.Img}14730583656547.png"></a>
             </div>
             <ul class="header-nav cl" id="header">
-                <li class="active">
+                <li class="{$nav['index']}">
                     <a href="">首页</a>
                 </li>
                 {volist name="menu" id="list"}
@@ -55,7 +57,9 @@
         </div>
     </div>
 </header>
-{__CONTENT__}
+{/block}
+{block name="main"}{/block}
+{block name="footer"}
 <footer class="footer">
     <div class="container">
         <ul class="link cl">
@@ -128,9 +132,12 @@
         </div>
     </div>
 </footer>
+{/block}
 <script src="{$Think.config.Common}jquery.min.js"></script>
 <script src="{$Think.config.Common}bootstarp/js/bootstrap.min.js"></script>
-<script src="{$Think.config.Js}index.js"></script>
+{block name="widgetScript"}{/block}
+<script src="{$Think.config.Js}index.js?r=Math.random()"></script>
+{block name="customScript"}{/block}
 </body>
 
 </html>

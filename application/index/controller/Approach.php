@@ -3,14 +3,12 @@ namespace app\index\controller;
 use app\common\controller\IndexBase;
 use think\Controller;
 
-class Index extends IndexBase
+class Approach extends IndexBase
 {
     public function index()
     {
-        $nav['index'] = 'active';
         $arr = array(
-            'title' => '天津广川科技有限公司',
-            'nav'=>$nav
+            'title' => '天津广川科技有限公司_走进广川_公司介绍',
         );
         $this->assign($arr);
         return $this->fetch();
